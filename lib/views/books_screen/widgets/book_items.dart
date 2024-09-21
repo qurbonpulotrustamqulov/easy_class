@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class BookItem extends StatefulWidget {
-   const BookItem(
+  const BookItem(
       {super.key,
-      required this.bookId,
-      required this.subtitle,
-      required this.title});
+        required this.bookId,
+        required this.subtitle,
+        required this.title,
+      required this.image});
   final String subtitle, title;
   final int bookId;
+  final String image;
 
   @override
   State<BookItem> createState() => _BookItemState();
@@ -23,19 +25,20 @@ class _BookItemState extends State<BookItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Colors.grey.shade100,
+      margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
-        vertical: 20,
+        vertical: 10,
       ),
       child: Row(
         children: [
-
           ClipRRect(
             borderRadius: BorderRadius.circular(3),
             child: Image.asset(
-              'assets/svg_icon/img.png',
-              height: 160,
+              widget.image,
+              height: 140,
             ),
           ),
           const SizedBox(
@@ -43,12 +46,12 @@ class _BookItemState extends State<BookItem> {
           ),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   widget.title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -57,12 +60,13 @@ class _BookItemState extends State<BookItem> {
                 ),
                 Text(
                   widget.subtitle,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-
+                  style: const TextStyle(
+                    fontSize: 15,
                   ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 20,),
               ],
             ),
           )

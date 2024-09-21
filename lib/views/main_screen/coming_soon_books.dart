@@ -1,21 +1,22 @@
+import 'package:easy_class/models/data_model.dart';
 import 'package:flutter/material.dart';
 
 class ComingSoonBooks extends StatefulWidget {
-  const ComingSoonBooks({super.key});
+  final DataModel? dataModel;
+  const ComingSoonBooks({super.key, required this.dataModel});
 
   @override
   State<ComingSoonBooks> createState() => _ComingSoonBooksState();
 }
 
 class _ComingSoonBooksState extends State<ComingSoonBooks> {
-  List<String> images = [
-    'assets/svg_icon/img.png',
-    'assets/svg_icon/img.png',
-    'assets/svg_icon/img.png',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+    List<String> imgPath = [
+      ...?widget.dataModel?.books.where((element) => element.status=="tez",).toList().map((e) => e.bookImage,)
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -23,7 +24,7 @@ class _ComingSoonBooksState extends State<ComingSoonBooks> {
       child: SizedBox(
         height: 150,
         child: ListView.builder(
-          itemCount: images.length,
+          itemCount: imgPath.length,
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           physics: const PageScrollPhysics(),
@@ -37,7 +38,7 @@ class _ComingSoonBooksState extends State<ComingSoonBooks> {
                 child: Image(
                   height: 140,
                   image: AssetImage(
-                    images[index],
+                    imgPath[index],
                   ),
                 ),
               ),

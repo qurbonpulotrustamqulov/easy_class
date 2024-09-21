@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:easy_class/models/data_model.dart';
 import 'package:easy_class/views/books_screen/books_screen.dart';
 import 'package:easy_class/views/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart' show rootBundle; // Faylni o'qish uchun
 
 class Tabs extends StatefulWidget {
   const Tabs({super.key});
@@ -11,21 +15,36 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
+
+  DataModel? datas;
+
+  Future<void> loadJsonData() async {
+    String jsonString = await rootBundle.loadString('assets/json/data.json');
+    final data = jsonDecode(jsonString);
+    datas = DataModel.fromJson(data);
+  }
   int selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
     });
   }
-  static final List<Widget> _pages = <Widget>[
-    const MainScreen(),
-    const BooksScreen(),
-  ];
+  @override
+  void initState() {
+    loadJsonData();
+    setState(() {
 
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: selectedIndex, children: _pages),
+      body: IndexedStack(index: selectedIndex, children: [
+         MainScreen(dataModel: datas,),
+        BooksScreen(dataModel: datas),
+
+      ]),
       bottomNavigationBar: SizedBox(
         height: 60 + MediaQuery.of(context).padding.bottom,
         child: BottomNavigationBar(

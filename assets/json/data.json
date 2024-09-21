@@ -1,8 +1,10 @@
 {
-  "easyClass": [
+  "books": [
     {
       "bookId": 1,
       "bookName": "Tarix",
+      "status": "tavsiya",
+      "bookImage": "assets/svg_icon/img.png",
       "classes": [
         {
           "classId": 5,
@@ -362,6 +364,8 @@
     {
       "bookId": 2,
       "bookName": "Geografiya",
+      "bookImage": "assets/svg_icon/img.png",
+      "status": "tavsiya",
       "classes": [
         {
           "classId": 1,
@@ -626,6 +630,8 @@
     {
       "bookId": 3,
       "bookName": "Adabiyot",
+      "status": "tavsiya",
+      "bookImage": "assets/svg_icon/img.png",
       "classes": [
         {
           "classId": 1,
@@ -871,7 +877,9 @@
     },
     {
       "bookId": 4,
+      "status": "tavsiya",
       "bookName":"Informatika",
+      "bookImage": "assets/svg_icon/img.png",
       "classes": [
         {
           "classId": 1,
@@ -1051,6 +1059,27 @@
           ]
         }
       ]
+    },
+    {
+      "bookId": 6,
+      "bookName": "Matematika",
+      "status": "tez",
+      "bookImage": "assets/svg_icon/img.png",
+      "classes": []
+    },
+    {
+      "bookId": 7,
+      "bookName": "Astronomiya",
+      "status": "tez",
+      "bookImage": "assets/svg_icon/img.png",
+      "classes": []
+    },
+    {
+      "bookId": 8,
+      "bookName": "Metafizika",
+      "status": "tez",
+      "bookImage": "assets/svg_icon/img.png",
+      "classes": []
     }
   ]
 }

@@ -1,11 +1,13 @@
+
+import 'package:easy_class/models/data_model.dart';
 import 'package:easy_class/views/main_screen/recommended_list.dart';
 import 'package:flutter/material.dart';
-
 import '../quick_test.dart';
 import 'coming_soon_books.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final DataModel ? dataModel;
+  const MainScreen({super.key, required this.dataModel});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -25,9 +27,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      backgroundColor:Colors.white,
+      backgroundColor: Colors.white,
       body: ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),
         child: NestedScrollView(
@@ -57,25 +58,29 @@ class _MainScreenState extends State<MainScreen> {
                           const QuickTestWidget(),
                           const Padding(
                             padding: EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 20),
-                            child: Text('Tavsiya etamiz',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                vertical: 10, horizontal: 20),
+                            child: Text(
+                              'Tavsiya etamiz',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          const RecommendedList(),
-                          const SizedBox(
-                            height: 20
+                          RecommendedList(
+                            dataModel: widget.dataModel,
                           ),
+                          const SizedBox(height: 20),
                           const Padding(
                             padding: EdgeInsets.symmetric(
-                              vertical:10,
+                              vertical: 10,
                               horizontal: 20,
                             ),
                             child: Text(
                               'Tez kunda',
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          const ComingSoonBooks(),
+                           ComingSoonBooks(dataModel: widget.dataModel,),
                           const SizedBox(
                             height: 40,
                           ),
@@ -94,7 +99,13 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({super.key, required this.title, this.rightWidget, required this.backgroundColor, required this.txtColor});
+  const AppBarWidget(
+      {super.key,
+      required this.title,
+      this.rightWidget,
+      required this.backgroundColor,
+      required this.txtColor});
+
   final String title;
   final Widget? rightWidget;
   final Color backgroundColor;
