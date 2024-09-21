@@ -22,6 +22,9 @@ class _TabsState extends State<Tabs> {
     String jsonString = await rootBundle.loadString('assets/json/data.json');
     final data = jsonDecode(jsonString);
     datas = DataModel.fromJson(data);
+    setState(() {
+
+    });
   }
   int selectedIndex = 0;
   void _onItemTapped(int index) {

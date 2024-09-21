@@ -99,7 +99,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> with QuestionMixins {
 
                             setState(() {});
                           },
-                          child: const Center(child: Text("Next")),
+                          child: const Center(child: Text("Keyingi")),
                         ),
                       )
                     ],

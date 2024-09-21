@@ -11,17 +11,15 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+class QuizScreenM extends StatefulWidget {
+  final String responseText;
+  const QuizScreenM({super.key, required this.responseText});
 
   @override
-  State<QuizScreen> createState() => _QuizScreenState();
+  State<QuizScreenM> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
-  String responseText = "";
-  TextEditingController controller = TextEditingController();
-
+class _QuizScreenState extends State<QuizScreenM> with QuestionMixins {
   Future<void> _createAndSavePDF(BuildContext context, String text) async {
     try {
       // PDF fayl yaratish
@@ -120,13 +118,31 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
     Share.shareXFiles([XFile(filePath)], text: 'Ulashilgan file!');
   }
 
+String resText = "";
+  getResponseText() async{
+    await askQuestion(widget.responseText).then((value) {
+      resText = value!;
+      isDoneTest = List.generate(5, (index) => false);
+      setState(() {});
+    });
+  }
+
+  @override
+  void initState() {
+    getResponseText();
+    setState(() {
+
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor:  Color(0xff00bac7),
+          backgroundColor:  const Color(0xff00bac7),
           title: const Text(
             "Easy Class",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -137,61 +153,21 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextFormField(
-                controller: controller,
-                decoration: InputDecoration(
-                  hintText: "Mavzu kiriting",
-                  suffixIcon: IconButton(
-                    onPressed: () async {
-                      if (controller.text != "") {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                content:
-                                    Lottie.asset("assets/json/loading.json"),
-                              );
-                            });
-                        await askQuestion(controller.text).then((value) {
-                          responseText = value!;
-                          Navigator.pop(context);
-                          debugPrint("\n\n\n$responseText\n\n\n");
-                          FocusNode().unfocus();
-                          controller.clear();
-                          isDoneTest = List.generate(5, (index) => false);
-                          setState(() {});
-                        });
-                      }
-                    },
-                    icon: Icon(
-                      Icons.send,
-                      color: controller.text != ""
-                          ? const Color(0xffF19D38)
-                          : Colors.grey,
-                    ),
-                  ),
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
               const Spacer(),
-              responseText == ""
+              resText == ""
                   ? noDataWidget
                   : QuestionsWidget(
-                      questions: parseQuizQuestions(responseText
-                          .replaceAll("```json", "")
-                          .replaceAll("```", "")),
-                    ),
+                questions: parseQuizQuestions(resText
+                    .replaceAll("```json", "")
+                    .replaceAll("```", "")),
+              ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        List<QuizQuestion> res = parseQuizQuestions(responseText
+                        List<QuizQuestion> res = parseQuizQuestions(resText
                             .replaceAll("```json", "")
                             .replaceAll("```", ""));
 
@@ -199,7 +175,7 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
                           String result = "";
                           for (int i = 0; i < res.length; i++) {
                             result +=
-                                "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
+                            "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
                           }
                           _createAndSavePDF(context, result);
                         }
@@ -207,7 +183,7 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
                       child: const Text("Pdf ulashish")),
                   ElevatedButton(
                       onPressed: () {
-                        List<QuizQuestion> res = parseQuizQuestions(responseText
+                        List<QuizQuestion> res = parseQuizQuestions(resText
                             .replaceAll("```json", "")
                             .replaceAll("```", ""));
 
@@ -215,7 +191,7 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
                           String result = "";
                           for (int i = 0; i < res.length; i++) {
                             result +=
-                                "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
+                            "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
                           }
                           _createAndSaveDoc(context, result);
                         }
@@ -223,6 +199,7 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
                       child: const Text("Doc ulashish"))
                 ],
               ),
+              const SizedBox(height: 20,)
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:easy_class/models/data_model.dart';
+import 'package:easy_class/views/books_screen/book_detail.dart';
 import 'package:easy_class/views/books_screen/widgets/book_items.dart';
 import 'package:flutter/material.dart';
 
@@ -81,6 +82,9 @@ class _BooksScreenState extends State<BooksScreen> {
               title: books[index].bookName,
               subtitle: books[index].classes.first.mundarija.first.desc??"",
               image: books[index].bookImage,
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BookDetail(dataModel: books[index],),));
+              },
             );
           },
         ),

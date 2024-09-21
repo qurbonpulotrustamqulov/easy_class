@@ -7,7 +7,6 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 const apiKey = "AIzaSyAKN7sSYCEIutf10K8VW8R66CBKdta09Lk";
 
 mixin QuestionMixins {
-
   List<bool> isDoneTest = [];
 
   PopupMenuItem myPopupButtonItem(
@@ -26,29 +25,23 @@ mixin QuestionMixins {
   Widget noDataWidget = const Column(
     children: [
       Text(
-        "No Quiz Yet",
+        "E'tibor bering",
         style: TextStyle(
             fontSize: 38,
             fontWeight: FontWeight.bold,
             color: Color(0xffF19D38)),
       ),
       Text(
-        "Enter Topic To generete One",
+        "Mavzu tanlagan bo'lsangiz biroz kuting yoki uning nomini kiritikng",
+        textAlign: TextAlign.center,
         style: TextStyle(fontSize: 16),
       ),
     ],
   );
 
   Future<String?> askQuestion(String topic) async {
-    String question = ''
-        'Create 10 questions in uzbek language at an easy on $topic with 4 options in JSON format indicating the correct answer. which is one of the ransom options.'
-        'Here is sample response format:'
-        'json[{'
-        ' "question": "Simple question",'
-        '"options": ["Option1", "Option2", "Option3", "Option4"],'
-        '"correct_answer": "Option2"'
-        ' }]'
-        '';
+    String question =
+        """ translate this topic: $topic to Uzbek and Create 5 questions in uzbek  at an easy on $topic with 4 options in JSON format indicating the correct answer. which is one of the ransom options. Here is sample response format: json[{ "question": "Simple question", "options": ["Option1", "Option2", "Option3", "Option4"], "correct_answer": "Option2" }] """;
 
     final model = GenerativeModel(
       model: 'gemini-1.5-flash-latest',
@@ -61,18 +54,12 @@ mixin QuestionMixins {
   }
 
   String textForAskQuestion(int order, QuizQuestion question) {
-    return ''
-        'Question ${order + 1} is: ${question.question}'
-        'My answer: ${question.userAnswer}'
-        'Correct answer: ${question.correctAnswer}'
-        '';
+    return """ Question ${order + 1} is: ${question.question} My answer: ${question.userAnswer} Correct answer: ${question.correctAnswer} """;
   }
 
   Future<String?> askAnalyse(List<QuizQuestion> questions) async {
-    String question = '''
-    Please analyze and send in html the following 5 quiz answers in uzbek and provide suggestions for improvement:
-    ${questions.map((e) => textForAskQuestion(questions.indexOf(e), e)).join('\n')}
-    ''';
+    String question =
+        """Please analyze and send in html the following 5 quiz answers and provide suggestions for improvement:${questions.map((e) => textForAskQuestion(questions.indexOf(e), e)).join('\n')}""";
     print(question);
 
     final model = GenerativeModel(
