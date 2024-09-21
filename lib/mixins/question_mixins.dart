@@ -41,7 +41,7 @@ mixin QuestionMixins {
 
   Future<String?> askQuestion(String topic) async {
     String question =
-        """ translate this topic: $topic to Uzbek and Create 5 questions in uzbek  at an easy on $topic with 4 options in JSON format indicating the correct answer. which is one of the ransom options. Here is sample response format: json[{ "question": "Simple question", "options": ["Option1", "Option2", "Option3", "Option4"], "correct_answer": "Option2" }] """;
+        """Create 5 questions in uzbek  at an easy on $topic with 4 options in JSON format indicating the correct answer. which is one of the ransom options. Here is sample response format: json[{ "question": "Simple question", "options": ["Option1", "Option2", "Option3", "Option4"], "correct_answer": "Option2" }] """;
 
     final model = GenerativeModel(
       model: 'gemini-1.5-flash-latest',
