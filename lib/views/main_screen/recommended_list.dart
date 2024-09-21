@@ -36,8 +36,8 @@ class _RecommendedListState extends State<RecommendedList> {
                   borderRadius: BorderRadius.circular(10),
                   child: Image(
                     height: 150,
-                    width: 120,
-                    image: AssetImage("assets/svg_icon/adabiyot.png",
+                    width: 110,
+                    image: AssetImage("assets/svg_icon/img.png",
                     ),
                     fit: BoxFit.fill,
                   ),

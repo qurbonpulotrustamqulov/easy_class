@@ -34,7 +34,7 @@ class _BookItemState extends State<BookItem> {
           ClipRRect(
             borderRadius: BorderRadius.circular(3),
             child: Image.asset(
-              'assets/svg_icon/adbiyot.png',
+              'assets/svg_icon/img.png',
               height: 160,
             ),
           ),

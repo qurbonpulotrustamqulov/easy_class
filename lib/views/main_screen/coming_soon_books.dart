@@ -9,9 +9,9 @@ class ComingSoonBooks extends StatefulWidget {
 
 class _ComingSoonBooksState extends State<ComingSoonBooks> {
   List<String> images = [
-    'assets/svg_icon/adbiyot.png',
-    'assets/svg_icon/adbiyot.png',
-    'assets/svg_icon/adbiyot.png',
+    'assets/svg_icon/img.png',
+    'assets/svg_icon/img.png',
+    'assets/svg_icon/img.png',
   ];
 
   @override

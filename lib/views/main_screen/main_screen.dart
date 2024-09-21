@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                               horizontal: 20,
                             ),
                             child: Text(
-                              'Teaz kunda',
+                              'Tez kunda',
                               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
