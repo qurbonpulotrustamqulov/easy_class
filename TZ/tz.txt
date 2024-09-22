@@ -1,0 +1,19 @@
+TZ for EasyClass
+1. EasyClass
+2. EasyClass is a platform that allows you to create, solve and share quick tests with the help of artificial intelligence, as well as reading textbooks. The project aims to provide teachers with automated test preparation and an interactive learning experience for students.
+3. The purpose of the EasyClass project:
+EasyClass aims to make the learning process efficient and convenient by providing the ability to create, solve and share quick tests, as well as reading textbooks with the help of artificial intelligence.
+4. Roles of EasyClass application participants:
+1. Admin: Manages users and monitors the system.
+2. Teacher: Uploads materials and evaluates students.
+3. Student: Completes and submits assignments on time.
+4. Ai assistant : Assists the teacher and helps in grading.
+5. Main directions:
+1. Create quick tests using AI.
+2. Solving quick tests.
+3. Sharing tests.
+4. Learning textbooks in an interactive format.
+6. System blocks:
+1. AI test generator
+2. Test evaluation system
+3. User interface and database.

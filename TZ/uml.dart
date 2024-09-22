@@ -1,0 +1,1 @@
+String umlLink = "https://www.figma.com/board/vABmZP1eHU9y4DedwU8s0u/Untitled?node-id=0-1&node-type=canvas&t=Sq4arWqdDKa0yMvy-0";
