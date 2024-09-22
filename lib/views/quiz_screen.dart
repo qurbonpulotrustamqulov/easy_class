@@ -21,6 +21,7 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
   String responseText = "";
   TextEditingController controller = TextEditingController();
+  FocusNode myFocusNode = FocusNode();
 
   Future<void> _createAndSavePDF(BuildContext context, String text) async {
     try {
@@ -120,13 +121,14 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
     Share.shareXFiles([XFile(filePath)], text: 'Ulashilgan file!');
   }
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor:  Color(0xff00bac7),
+          backgroundColor: Color(0xff00bac7),
           title: const Text(
             "Easy Class",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -138,12 +140,14 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
+                focusNode: myFocusNode,
                 controller: controller,
                 decoration: InputDecoration(
                   hintText: "Mavzu kiriting",
                   suffixIcon: IconButton(
                     onPressed: () async {
                       if (controller.text != "") {
+                        myFocusNode.unfocus();
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -156,7 +160,6 @@ class _QuizScreenState extends State<QuizScreen> with QuestionMixins {
                           responseText = value!;
                           Navigator.pop(context);
                           debugPrint("\n\n\n$responseText\n\n\n");
-                          FocusNode().unfocus();
                           controller.clear();
                           isDoneTest = List.generate(5, (index) => false);
                           setState(() {});

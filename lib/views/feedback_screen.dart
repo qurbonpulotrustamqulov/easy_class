@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:lottie/lottie.dart';
 
-
 class FeedbackScreen extends StatefulWidget {
-
   final List<QuizQuestion> questions;
 
   const FeedbackScreen({
@@ -21,20 +19,20 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> with QuestionMixins {
-
   DatabaseHelper databaseHelper = DatabaseHelper();
 
   Future<int> safeFeedback(String feedback) async {
     var dbClient = await databaseHelper.db;
-    return await dbClient.insert(TableNames.feedBack,
-        MyFeedback(time: DateTime.now().toString(), feedback: feedback).toJson());
+    return await dbClient.insert(
+        TableNames.feedBack,
+        MyFeedback(time: DateTime.now().toString(), feedback: feedback)
+            .toJson());
   }
 
   String feedBackText = "";
+
   Future<void> getFeedback() async {
     await askAnalyse(widget.questions).then((value) {
-
-
       setState(() {
         feedBackText = value ?? "";
       });
@@ -66,10 +64,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> with QuestionMixins {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Html(
-                  data: feedBackText.replaceAll("```html", "").replaceAll("```", ""),
+                  data: feedBackText
+                      .replaceAll("```html", "")
+                      .replaceAll("```", ""),
                   style: {
-                    "body": Style(
-                    ),
+                    "body": Style(),
                   },
                 ),
               ),
@@ -84,9 +83,15 @@ class _FeedbackScreenState extends State<FeedbackScreen> with QuestionMixins {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Try different topic"),
-            ElevatedButton(onPressed: (){Navigator.pop(context);
-              }, child: Text("Restart", ))
+            const Text("Boshqa mavzu"),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Qayta ishga tushirish",
+                ))
           ],
         ),
       ),

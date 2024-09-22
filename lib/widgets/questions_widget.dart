@@ -46,6 +46,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> with QuestionMixins {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      const SizedBox(height: 25,),
                       // Text(widget.questions[index].correctAnswer ?? ""),
                       Column(
                         children: List.generate(4, (index4) {
@@ -66,6 +67,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> with QuestionMixins {
                           );
                         }),
                       ),
+                      const SizedBox(height: 30,),
                       Container(
                         height: 60,
                         width: double.maxFinite,
@@ -85,7 +87,6 @@ class _QuestionsWidgetState extends State<QuestionsWidget> with QuestionMixins {
                               }
                               if (isDoneTest
                                   .every((element) => element == true)) {
-                                debugPrint("All done");
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -99,7 +100,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> with QuestionMixins {
 
                             setState(() {});
                           },
-                          child: const Center(child: Text("Keyingi")),
+                          child: const Center(child: Text("Keyingi", style: TextStyle(fontSize: 18),)),
                         ),
                       )
                     ],

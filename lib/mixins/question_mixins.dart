@@ -25,14 +25,14 @@ mixin QuestionMixins {
   Widget noDataWidget = const Column(
     children: [
       Text(
-        "E'tibor bering",
+        "Quiz mavjud emas!",
         style: TextStyle(
             fontSize: 38,
             fontWeight: FontWeight.bold,
             color: Color(0xffF19D38)),
       ),
       Text(
-        "Mavzu tanlagan bo'lsangiz biroz kuting yoki uning nomini kiritikng",
+        "Mavzu nomini kiriting va yuborish tugmasini bosing",
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 16),
       ),
@@ -59,7 +59,7 @@ mixin QuestionMixins {
 
   Future<String?> askAnalyse(List<QuizQuestion> questions) async {
     String question =
-        """Please analyze and send in html the following 5 quiz answers and provide suggestions for improvement:${questions.map((e) => textForAskQuestion(questions.indexOf(e), e)).join('\n')}""";
+        """Please analyze and send in html the following 5 quiz answers in uzbek and provide suggestions for improvement:${questions.map((e) => textForAskQuestion(questions.indexOf(e), e)).join('\n')}""";
     print(question);
 
     final model = GenerativeModel(

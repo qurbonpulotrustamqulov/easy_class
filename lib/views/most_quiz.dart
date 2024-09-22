@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:easy_class/mixins/question_mixins.dart';
@@ -13,6 +12,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 class QuizScreenM extends StatefulWidget {
   final String responseText;
+
   const QuizScreenM({super.key, required this.responseText});
 
   @override
@@ -118,8 +118,9 @@ class _QuizScreenState extends State<QuizScreenM> with QuestionMixins {
     Share.shareXFiles([XFile(filePath)], text: 'Ulashilgan file!');
   }
 
-String resText = "";
-  getResponseText() async{
+  String resText = "";
+
+  getResponseText() async {
     await askQuestion(widget.responseText).then((value) {
       resText = value!;
       isDoneTest = List.generate(5, (index) => false);
@@ -130,19 +131,17 @@ String resText = "";
   @override
   void initState() {
     getResponseText();
-    setState(() {
-
-    });
+    setState(() {});
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          backgroundColor:  const Color(0xff00bac7),
+          backgroundColor: const Color(0xff00bac7),
           title: const Text(
             "Easy Class",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -155,12 +154,14 @@ String resText = "";
             children: [
               const Spacer(),
               resText == ""
-                  ? noDataWidget
+                  ? Center(
+                child: Lottie.asset("assets/json/loading.json"),
+              )
                   : QuestionsWidget(
-                questions: parseQuizQuestions(resText
-                    .replaceAll("```json", "")
-                    .replaceAll("```", "")),
-              ),
+                      questions: parseQuizQuestions(resText
+                          .replaceAll("```json", "")
+                          .replaceAll("```", "")),
+                    ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -175,7 +176,7 @@ String resText = "";
                           String result = "";
                           for (int i = 0; i < res.length; i++) {
                             result +=
-                            "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
+                                "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
                           }
                           _createAndSavePDF(context, result);
                         }
@@ -191,7 +192,7 @@ String resText = "";
                           String result = "";
                           for (int i = 0; i < res.length; i++) {
                             result +=
-                            "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
+                                "${i + 1}.${res[i].question}\nA)${res[i].options?[0]}\nB)${res[i].options?[1]}\nC)${res[i].options?[2]}'\nD)${res[i].options?[3]}\n\n";
                           }
                           _createAndSaveDoc(context, result);
                         }
@@ -199,7 +200,9 @@ String resText = "";
                       child: const Text("Doc ulashish"))
                 ],
               ),
-              const SizedBox(height: 20,)
+              const SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),
